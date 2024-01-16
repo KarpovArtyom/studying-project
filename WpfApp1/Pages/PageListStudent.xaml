@@ -1,0 +1,112 @@
+﻿<Page x:Class="WpfApp1.Pages.PageListStudent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="PageListStudent" Height="535">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Фильтр по предприятию"
+                       Margin="5"/>
+            <ComboBox Name="CmbDiscipline"
+                      SelectionChanged="CmbDiscipline_SelectionChanged"/>
+
+            <TextBlock Text="Поиск по названию предприятия"
+                       Margin="5"/>
+            <TextBox Name="TxtSearch" Margin="5"
+                     TextChanged="TxtSearch_TextChanged"/>
+
+            <TextBlock Text="Сортировка по цене"
+                       Margin="5"/>
+            <RadioButton Content="По возрастанию"
+                         Name="RbtnAsc"
+                         Click="RbtnAsc_Click"/>
+            <RadioButton Content="По убыванию"
+                         Name="RbtnDesc"
+                         Click="RbtnDesc_Click"/>
+
+            <Button Name="BtnResults"
+                    Content="Анализ данных"
+                    Margin="5"
+                    Click="BtnResults_Click"/>
+            <ListBox Name="LstResults"
+                     Height="150"
+                     Margin="5"/>
+
+            <Button Name="BtnAdd"
+                     Margin="5"
+                     Content="Добавить"
+                     Click="BtnAdd_Click"/>
+
+            <Button Name="BtnDelete"
+                     Margin="5"
+                     Content="Удалить"
+                     Click="BtnDelete_Click"/>
+
+            <Button Name="BtnListView"
+                    Margin="5"
+                    Content="ListView"
+                    Click="BtnListView_Click"/>
+            <Button Name="BtnExcel"
+                    Margin="5"
+                    Content="Создать файл Excel"
+                    Click="BtnExcel_Click"/>
+            <Button Name="BtnExcelShablon"
+                    Margin="5"
+                    Content="Создать файл Excel по шаблону"
+                    Click="BtnExcelShablon_Click"/>
+            <Button Name="BtnWord"
+                    Margin="5"
+                    Content="Создать файл Word"
+                    Click="BtnWord_Click"/>
+
+
+        </StackPanel>
+        <DataGrid Grid.Column="1" 
+                  Name="DtgListStudent"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+        
+                        Header="Название предприятия"
+                        Binding="{Binding Название_предприятия}"/>
+                <DataGridTextColumn
+                        Header="наименование товара"
+                        Binding="{Binding Товары.Название_товара}"/>
+                <DataGridTextColumn
+                        Header="единица измерения"
+                        Binding="{Binding единица_измерения}"/>
+                <DataGridTextColumn
+                        Header="цена"
+                        Binding="{Binding цена}"/>
+                <DataGridTextColumn
+                        Header="Дата доставки"
+                        Binding="{Binding Дата_доставки}"/>
+                <DataGridTextColumn
+                        Header="Объём"
+                        Binding="{Binding Объём}"/>
+                <DataGridTextColumn
+                        Header="Себестоимость"
+                        Binding="{Binding Себестоимость}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnEdit"
+                                    Content="Редактировать"
+                                    Click="btnEdit_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

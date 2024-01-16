@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Предприятия">
+    <Key>
+      <PropertyRef Name="ID_предприятия" />
+    </Key>
+    <Property Name="ID_предприятия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Название_предприятия" Type="varchar" MaxLength="50" />
+    <Property Name="ID_товара" Type="int" />
+    <Property Name="единица_измерения" Type="varchar" MaxLength="50" />
+    <Property Name="цена" Type="int" />
+    <Property Name="Дата_доставки" Type="date" />
+    <Property Name="Объём" Type="int" />
+    <Property Name="Себестоимость" Type="int" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Товары">
+    <Key>
+      <PropertyRef Name="ID_товара" />
+    </Key>
+    <Property Name="ID_товара" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Название_товара" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Предприятия_Товары">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+    <End Role="Предприятия" Type="Self.Предприятия" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="ID_товара" />
+      </Principal>
+      <Dependent Role="Предприятия">
+        <PropertyRef Name="ID_товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Model1Container">
+    <EntitySet Name="Предприятия" EntityType="Self.Предприятия" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Товары" EntityType="Self.Товары" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Предприятия_Товары" Association="Self.FK_Предприятия_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Предприятия" EntitySet="Предприятия" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

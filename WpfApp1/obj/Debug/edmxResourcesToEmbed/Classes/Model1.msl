@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Model1Container" CdmEntityContainer="УчебнаяEntities">
+    <EntitySetMapping Name="Предприятия">
+      <EntityTypeMapping TypeName="Model1.Предприятия">
+        <MappingFragment StoreEntitySet="Предприятия">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ID_предприятия" ColumnName="ID_предприятия" />
+          <ScalarProperty Name="Название_предприятия" ColumnName="Название_предприятия" />
+          <ScalarProperty Name="ID_товара" ColumnName="ID_товара" />
+          <ScalarProperty Name="единица_измерения" ColumnName="единица_измерения" />
+          <ScalarProperty Name="цена" ColumnName="цена" />
+          <ScalarProperty Name="Дата_доставки" ColumnName="Дата_доставки" />
+          <ScalarProperty Name="Объём" ColumnName="Объём" />
+          <ScalarProperty Name="Себестоимость" ColumnName="Себестоимость" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Товары">
+      <EntityTypeMapping TypeName="Model1.Товары">
+        <MappingFragment StoreEntitySet="Товары">
+          <ScalarProperty Name="ID_товара" ColumnName="ID_товара" />
+          <ScalarProperty Name="Название_товара" ColumnName="Название_товара" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

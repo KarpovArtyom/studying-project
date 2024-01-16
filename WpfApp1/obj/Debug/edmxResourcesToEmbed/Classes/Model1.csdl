@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Предприятия">
+    <Key>
+      <PropertyRef Name="ID_предприятия" />
+    </Key>
+    <Property Name="ID_предприятия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Название_предприятия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_товара" Type="Int32" />
+    <Property Name="единица_измерения" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="цена" Type="Int32" />
+    <Property Name="Дата_доставки" Type="DateTime" Precision="0" />
+    <Property Name="Объём" Type="Int32" />
+    <Property Name="Себестоимость" Type="Int32" />
+    <NavigationProperty Name="Товары" Relationship="Self.FK_Предприятия_Товары" FromRole="Предприятия" ToRole="Товары" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Товары">
+    <Key>
+      <PropertyRef Name="ID_товара" />
+    </Key>
+    <Property Name="ID_товара" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Название_товара" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Предприятия" Relationship="Self.FK_Предприятия_Товары" FromRole="Товары" ToRole="Предприятия" />
+  </EntityType>
+  <Association Name="FK_Предприятия_Товары">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+    <End Role="Предприятия" Type="Self.Предприятия" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="ID_товара" />
+      </Principal>
+      <Dependent Role="Предприятия">
+        <PropertyRef Name="ID_товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="УчебнаяEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Предприятия" EntityType="Self.Предприятия" />
+    <EntitySet Name="Товары" EntityType="Self.Товары" />
+    <AssociationSet Name="FK_Предприятия_Товары" Association="Self.FK_Предприятия_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Предприятия" EntitySet="Предприятия" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

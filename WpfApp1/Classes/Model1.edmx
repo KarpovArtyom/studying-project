@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Предприятия">
+          <Key>
+            <PropertyRef Name="ID_предприятия" />
+          </Key>
+          <Property Name="ID_предприятия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_предприятия" Type="varchar" MaxLength="50" />
+          <Property Name="ID_товара" Type="int" />
+          <Property Name="единица_измерения" Type="varchar" MaxLength="50" />
+          <Property Name="цена" Type="int" />
+          <Property Name="Дата_доставки" Type="date" />
+          <Property Name="Объём" Type="int" />
+          <Property Name="Себестоимость" Type="int" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Товары">
+          <Key>
+            <PropertyRef Name="ID_товара" />
+          </Key>
+          <Property Name="ID_товара" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_товара" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Предприятия_Товары">
+          <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+          <End Role="Предприятия" Type="Self.Предприятия" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товары">
+              <PropertyRef Name="ID_товара" />
+            </Principal>
+            <Dependent Role="Предприятия">
+              <PropertyRef Name="ID_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Model1Container">
+          <EntitySet Name="Предприятия" EntityType="Self.Предприятия" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Товары" EntityType="Self.Товары" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Предприятия_Товары" Association="Self.FK_Предприятия_Товары">
+            <End Role="Товары" EntitySet="Товары" />
+            <End Role="Предприятия" EntitySet="Предприятия" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Предприятия">
+          <Key>
+            <PropertyRef Name="ID_предприятия" />
+          </Key>
+          <Property Name="ID_предприятия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_предприятия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_товара" Type="Int32" />
+          <Property Name="единица_измерения" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="цена" Type="Int32" />
+          <Property Name="Дата_доставки" Type="DateTime" Precision="0" />
+          <Property Name="Объём" Type="Int32" />
+          <Property Name="Себестоимость" Type="Int32" />
+          <NavigationProperty Name="Товары" Relationship="Self.FK_Предприятия_Товары" FromRole="Предприятия" ToRole="Товары" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Товары">
+          <Key>
+            <PropertyRef Name="ID_товара" />
+          </Key>
+          <Property Name="ID_товара" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_товара" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Предприятия" Relationship="Self.FK_Предприятия_Товары" FromRole="Товары" ToRole="Предприятия" />
+        </EntityType>
+        <Association Name="FK_Предприятия_Товары">
+          <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+          <End Role="Предприятия" Type="Self.Предприятия" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товары">
+              <PropertyRef Name="ID_товара" />
+            </Principal>
+            <Dependent Role="Предприятия">
+              <PropertyRef Name="ID_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="УчебнаяEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Предприятия" EntityType="Self.Предприятия" />
+          <EntitySet Name="Товары" EntityType="Self.Товары" />
+          <AssociationSet Name="FK_Предприятия_Товары" Association="Self.FK_Предприятия_Товары">
+            <End Role="Товары" EntitySet="Товары" />
+            <End Role="Предприятия" EntitySet="Предприятия" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Model1Container" CdmEntityContainer="УчебнаяEntities">
+          <EntitySetMapping Name="Предприятия">
+            <EntityTypeMapping TypeName="Model1.Предприятия">
+              <MappingFragment StoreEntitySet="Предприятия">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ID_предприятия" ColumnName="ID_предприятия" />
+                <ScalarProperty Name="Название_предприятия" ColumnName="Название_предприятия" />
+                <ScalarProperty Name="ID_товара" ColumnName="ID_товара" />
+                <ScalarProperty Name="единица_измерения" ColumnName="единица_измерения" />
+                <ScalarProperty Name="цена" ColumnName="цена" />
+                <ScalarProperty Name="Дата_доставки" ColumnName="Дата_доставки" />
+                <ScalarProperty Name="Объём" ColumnName="Объём" />
+                <ScalarProperty Name="Себестоимость" ColumnName="Себестоимость" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Товары">
+            <EntityTypeMapping TypeName="Model1.Товары">
+              <MappingFragment StoreEntitySet="Товары">
+                <ScalarProperty Name="ID_товара" ColumnName="ID_товара" />
+                <ScalarProperty Name="Название_товара" ColumnName="Название_товара" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
